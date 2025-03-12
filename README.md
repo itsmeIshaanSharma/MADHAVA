@@ -1,7 +1,7 @@
 # M.A.D.H.A.V.A
 
 <div align="center">
-  <img src="client/src/logo.png" alt="M.A.D.H.A.V.A. Logo" width="300" />
+  <img src="logo.png" alt="M.A.D.H.A.V.A. Logo" width="300" />
   <h1>Multi-domain Analytical Data Harvesting & Automated Verification Assistant</h1>
 </div>
 
