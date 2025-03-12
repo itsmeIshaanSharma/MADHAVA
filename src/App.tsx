@@ -1,17 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import { BrowserRouter, Routes, Route, Navigate, Link } from 'react-router-dom';
-
 import { QueryInterface } from './components/QueryInterface';
 import { LoginPage } from './components/LoginPage';
 import { HistoryPage } from './components/HistoryPage';
 import { 
   LineChart, History, LogOut, ChevronRight, CreditCard, TrendingUp, 
   DollarSign, AlertCircle, User, Stethoscope, Scale, Newspaper, ShoppingBag,
-  BookOpen, Code, UserPlus, Globe, FlaskConical, Briefcase, GraduationCap, Plane
+  BookOpen, Code, UserPlus, Globe, FlaskConical, Briefcase, GraduationCap, Plane,
+  Home
 } from 'lucide-react';
 import { supabase } from './lib/supabase';
 import { motion } from 'framer-motion';
 import { Domain } from './types';
+import PricingCards from './components/PricingCards';
 
 function App() {
   const [user, setUser] = useState<any>(null);
@@ -147,12 +148,28 @@ function App() {
                 {currentDomain.symbol}
               </motion.div>
               <div>
-                
+                <h1 className="text-2xl font-bold text-white app-title">M.A.D.H.A.V.A.</h1>
                 <p className="text-xs domain-subtitle text-white/80">{currentDomain.title} Intelligence</p>
               </div>
             </Link>
             
             <div className="flex items-center space-x-6">
+              <Link
+                to="/"
+                className={`hidden md:flex items-center ${currentDomain.textColor} hover:text-white`}
+              >
+                <Home className="w-5 h-5 mr-1" />
+                <span>Home</span>
+              </Link>
+
+              <Link
+                to="/pricing"
+                className={`hidden md:flex items-center ${currentDomain.textColor} hover:text-white`}
+              >
+                <CreditCard className="w-5 h-5 mr-1" />
+                <span>Pricing</span>
+              </Link>
+              
               <div className="hidden xl:flex bg-opacity-20 bg-black rounded-lg p-1 space-x-1">
                 {primaryDomains.map((domain) => (
                   <motion.button
@@ -270,12 +287,66 @@ function App() {
             <Route 
               path="/" 
               element={
-                <QueryInterface 
-                  setShowLoginPrompt={setShowLoginPrompt} 
-                  user={user} 
-                  domain={selectedDomain} 
-                  domainConfig={domainConfig}
-                />
+                <div className="space-y-8">
+                  <div className="text-center max-w-4xl mx-auto mb-12">
+                    <h1 className="text-4xl font-bold mb-6">
+                      Welcome to M.A.D.H.A.V.A.
+                    </h1>
+                    <p className="text-xl mb-4">
+                      Intelligent Data Processing for Smarter Decisions
+                    </p>
+                    <p className="text-lg mb-8 italic text-gray-600">
+                      "Turning raw data into actionable insights – instantly, accurately, and efficiently."
+                    </p>
+                    <p className="text-gray-600">
+                      M.A.D.H.A.V.A. (Multi-domain Analytical Data Harvesting & Automated Verification Assistant) 
+                      is an advanced AI-driven platform designed to provide real-time, domain-specific, and 
+                      verified information for professionals.
+                    </p>
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {primaryDomains.map((domain) => (
+                      <div 
+                        key={domain}
+                        className={`p-6 rounded-lg border border-opacity-20 hover:border-opacity-50 
+                          transition-all duration-300 cursor-pointer bg-white bg-opacity-5 
+                          hover:bg-opacity-10 backdrop-blur-sm`}
+                        onClick={() => setSelectedDomain(domain as Domain)}
+                      >
+                        <div className="flex items-center space-x-3 mb-4">
+                          <span className="p-2 rounded-lg bg-opacity-20 bg-white">
+                            {domainConfig[domain as Domain].icon}
+                          </span>
+                          <h3 className="text-xl font-semibold">
+                            {domain.charAt(0).toUpperCase() + domain.slice(1)}
+                          </h3>
+                        </div>
+                        <p className="text-sm text-gray-600">
+                          {domainConfig[domain as Domain].title}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              } 
+            />
+            <Route 
+              path="/pricing" 
+              element={
+                <div className="bg-[hsl(224,71%,4%)] -mt-8 -mx-4 px-4 py-8">
+                  <div className="max-w-7xl mx-auto">
+                    <div className="text-center mb-12">
+                      <h2 className="text-4xl font-bold text-white mb-4">
+                        Choose Your Plan
+                      </h2>
+                      <p className="text-gray-400 text-lg">
+                        Select the perfect pricing plan for your needs
+                      </p>
+                    </div>
+                    <PricingCards />
+                  </div>
+                </div>
               } 
             />
           </Routes>
@@ -293,7 +364,7 @@ function App() {
                   >
                     {currentDomain.symbol}
                   </motion.span>
-                  <span></span>
+                  <span>M.A.D.H.A.V.A.</span>
                 </h3>
                 <p className="text-sm domain-subtitle text-white/80">
                   Multi-domain Analytical Data Harvesting & Automated Verification Assistant

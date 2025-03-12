@@ -8,6 +8,7 @@ import DomainPage from './pages/DomainPage.jsx';
 import Profile from './components/Profile';
 import Team from './components/Team';
 import LoadingScreen from './components/LoadingScreen';
+import APIReference from './components/APIReference';
  // Keep logo for header
 import './App.css';
 
@@ -111,6 +112,18 @@ function App() {
                   </main>
                 </div>
               } />
+              
+              {/* Add API Reference Route */}
+              <Route 
+                path="/api-reference" 
+                element={
+                  <React.Suspense fallback={<LoadingScreen />}>
+                    <div className="container mx-auto px-4 py-8">
+                      <APIReference />
+                    </div>
+                  </React.Suspense>
+                } 
+              />
               
               {/* Team Route */}
               <Route 

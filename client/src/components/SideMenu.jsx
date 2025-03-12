@@ -87,7 +87,7 @@ const SideMenu = ({ isOpen, onClose }) => {
                 </Link>
               </li>
               <li>
-                <Link to="/api" onClick={onClose}>
+                <Link to="/api-reference" onClick={onClose}>
                   <span className="icon">🔌</span>
                   API Reference
                 </Link>
@@ -96,6 +96,12 @@ const SideMenu = ({ isOpen, onClose }) => {
                 <Link to="/tutorials" onClick={onClose}>
                   <span className="icon">🎓</span>
                   Tutorials
+                </Link>
+              </li>
+              <li>
+                <Link to="/pricing" onClick={onClose}>
+                  <span className="icon">💲</span>
+                  Pricing
                 </Link>
               </li>
             </ul>

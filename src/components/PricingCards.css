@@ -1,0 +1,134 @@
+.pricing-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  padding: 2rem;
+  background: hsl(224 71% 4%);
+}
+
+.pricing-card {
+  background: hsl(224 71% 4%);
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 
+              0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  transition: all 0.3s ease;
+  border: 1px solid hsl(216 34% 17%);
+}
+
+.pricing-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+              0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  border-color: hsl(216 34% 25%);
+}
+
+.pricing-card h3 {
+  color: hsl(210 40% 98%);
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.plan {
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid hsl(216 34% 17%);
+  padding-bottom: 1rem;
+}
+
+.plan h4 {
+  color: hsl(210 40% 98%);
+  margin-bottom: 0.5rem;
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+
+.plan ul {
+  list-style: none;
+  padding: 0;
+}
+
+.plan li {
+  margin-bottom: 0.5rem;
+  color: hsl(215 20% 65%);
+  font-size: 0.95rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.plan li svg {
+  width: 16px;
+  height: 16px;
+}
+
+.best-for {
+  font-style: italic;
+  color: hsl(215 20% 65%);
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  padding-top: 1rem;
+  border-top: 1px solid hsl(216 34% 17%);
+}
+
+/* Add these new styles for feature indicators */
+.feature-check {
+  color: hsl(147, 50%, 47%);
+}
+
+.feature-x {
+  color: hsl(0, 63%, 31%);
+}
+
+/* Price tag styling */
+.price-tag {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: hsl(210 40% 98%);
+  margin: 1rem 0;
+}
+
+/* Popular plan highlight */
+.pricing-card.popular {
+  border: 1px solid hsl(217.2 91.2% 59.8%);
+  position: relative;
+  overflow: hidden;
+}
+
+.popular-badge {
+  position: absolute;
+  top: 1rem;
+  right: -2rem;
+  background: hsl(217.2 91.2% 59.8%);
+  color: hsl(210 40% 98%);
+  padding: 0.25rem 3rem;
+  transform: rotate(45deg);
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+/* Button styling */
+.pricing-button {
+  width: 100%;
+  padding: 0.75rem 1.5rem;
+  background: hsl(217.2 91.2% 59.8%);
+  color: hsl(210 40% 98%);
+  border: none;
+  border-radius: 6px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.pricing-button:hover {
+  background: hsl(217.2 91.2% 49.8%);
+}
+
+.pricing-button.secondary {
+  background: hsl(216 34% 17%);
+  color: hsl(210 40% 98%);
+}
+
+.pricing-button.secondary:hover {
+  background: hsl(216 34% 25%);
+} 
