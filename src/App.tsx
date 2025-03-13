@@ -127,8 +127,24 @@ function App() {
 
   if (loading) {
     return (
-      <div className={`flex items-center justify-center min-h-screen bg-gradient-to-br ${currentDomain.color}`}>
-        <div className="animate-spin rounded-full h-16 w-16 border-4 border-white border-t-transparent"></div>
+      <div className="fixed inset-0 flex items-center justify-center bg-gradient-to-br from-blue-800 to-blue-600">
+        <div className="flex flex-col items-center">
+          <div className="relative flex items-center justify-center w-20 h-20">
+            <div className="absolute inset-0 rounded-full border-4 border-white border-t-transparent animate-spin"></div>
+            <span className="text-white text-2xl">{currentDomain.symbol}</span>
+          </div>
+          <p className="mt-4 text-white text-lg font-medium">Loading M.A.D.H.A.V.A.</p>
+          
+          <div className="w-48 h-1 bg-white/20 rounded-full mt-4">
+            <div 
+              className="h-full bg-white rounded-full"
+              style={{ 
+                width: '70%',
+                animation: 'pulse 1.5s ease-in-out infinite'
+              }}
+            ></div>
+          </div>
+        </div>
       </div>
     );
   }
@@ -334,13 +350,13 @@ function App() {
             <Route 
               path="/pricing" 
               element={
-                <div className="bg-[hsl(224,71%,4%)] -mt-8 -mx-4 px-4 py-8">
-                  <div className="max-w-7xl mx-auto">
+                <div className="min-h-screen bg-black">
+                  <div className="max-w-7xl mx-auto px-4 py-16">
                     <div className="text-center mb-12">
                       <h2 className="text-4xl font-bold text-white mb-4">
                         Choose Your Plan
                       </h2>
-                      <p className="text-gray-400 text-lg">
+                      <p className="text-gray-400 text-lg mb-8">
                         Select the perfect pricing plan for your needs
                       </p>
                     </div>

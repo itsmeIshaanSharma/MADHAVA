@@ -9,7 +9,8 @@ import Profile from './components/Profile';
 import Team from './components/Team';
 import LoadingScreen from './components/LoadingScreen';
 import APIReference from './components/APIReference';
- // Keep logo for header
+import Pricing from './components/Pricing';
+// Keep logo for header
 import './App.css';
 
 // Icons (you can replace these with actual icons)
@@ -131,6 +132,16 @@ function App() {
                 element={
                   <React.Suspense fallback={<LoadingScreen />}>
                     <Team />
+                  </React.Suspense>
+                } 
+              />
+              
+              {/* Pricing Route */}
+              <Route 
+                path="/pricing" 
+                element={
+                  <React.Suspense fallback={<LoadingScreen />}>
+                    <Pricing />
                   </React.Suspense>
                 } 
               />
