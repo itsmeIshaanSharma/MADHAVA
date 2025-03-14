@@ -13,6 +13,14 @@ import Pricing from './components/Pricing';
 // Keep logo for header
 import './App.css';
 
+// Add future flags configuration
+const routerConfig = {
+  future: {
+    v7_startTransition: true,
+    v7_relativeSplatPath: true
+  }
+};
+
 // Icons (you can replace these with actual icons)
 const icons = {
   finance: '💰',
@@ -55,7 +63,7 @@ function App() {
 
   return (
     <ThemeProvider>
-      <Router>
+      <Router {...routerConfig}>
         <div className="app">
           {isLoading && <LoadingScreen />}
 

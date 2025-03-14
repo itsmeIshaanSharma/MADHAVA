@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Search, Filter, Loader2, AlertTriangle, BarChart, TrendingUp, DollarSign, ChevronRight, Lock } from 'lucide-react';
-import type { QueryRequest, QueryResponse } from '../types';
-import { supabase } from '../lib/supabase';
+
 import { motion, AnimatePresence } from 'framer-motion';
 
 interface Alert {

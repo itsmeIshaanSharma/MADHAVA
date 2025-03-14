@@ -1,75 +1,107 @@
-# M.A.D.H.A.V.A
+# MADHAVA - Domain-Specific AI Assistant
 
-<div align="center">
-  <img src="logo.png" alt="M.A.D.H.A.V.A. Logo" width="300" />
-  <h1>Multi-domain Analytical Data Harvesting & Automated Verification Assistant</h1>
-</div>
-
-## Overview
-
-M.A.D.H.A.V.A. is an advanced AI-powered assistant that provides intelligent analysis and insights across multiple domains:
-
-- 💰 **Finance**: Market analysis and investment insights
-- 🏥 **Healthcare**: Medical research and clinical analysis
-- ⚖️ **Legal**: Case analysis and compliance
-- 💻 **Code Assistant**: AI debugging and code review
-- 📰 **News**: Real-time analysis and trend detection
-- 🛍️ **E-commerce**: Market trends and consumer behavior
+MADHAVA is a domain-specific AI assistant that uses Google's Gemini 1.5 Pro model to provide specialized responses across different domains.
 
 ## Features
 
-- **Domain-Specific Processing**: Tailored analysis for each domain
-- **RAG Implementation**: Advanced retrieval-augmented generation
-- **Real-time Insights**: Instant analysis and recommendations
-- **Interactive Interface**: User-friendly query system
-- **Scalable Architecture**: Built for performance and reliability
+- Modern dark theme UI
+- Domain-specific AI responses
+- Real-time metrics (response time, token count)
+- Error handling and offline detection
 
-## Getting Started
+## Project Structure
 
-1. Clone the repository
-
-```bash
-git clone https://github.com/yourusername/M.A.D.H.A.V.A..git
-cd M.A.D.H.A.V.A.
+```
+├── backend/
+│   ├── gemini.js         # Gemini API integration
+│   ├── server.js         # Express server
+│   ├── .env              # Environment variables
+│   └── package.json      # Backend dependencies
+├── client/
+│   ├── src/
+│   │   ├── components/   # React components
+│   │   ├── pages/        # Page components
+│   │   └── ...
+│   ├── .env              # Frontend environment variables
+│   └── package.json      # Frontend dependencies
+└── README.md             # This file
 ```
 
-2. Install dependencies
+## Setup Instructions
 
-```bash
-# Backend
-python -m venv venv
-source venv/bin/activate
-pip install -r requirements.txt
+### Prerequisites
 
-# Frontend
-cd client
-npm install
-```
+- Node.js (v16 or higher)
+- Google Gemini API key (get one from [Google AI Studio](https://makersuite.google.com/app/apikey))
 
-3. Start the application
+### Backend Setup
 
-```bash
-# Backend
-python main.py
+1. Navigate to the backend directory:
+   ```
+   cd backend
+   ```
 
-# Frontend
-cd client
-npm start
-```
+2. Install dependencies:
+   ```
+   npm install
+   ```
 
-## Architecture
+3. Create a `.env` file in the backend directory with the following content:
+   ```
+   GEMINI_API_KEY=your_gemini_api_key_here
+   PORT=5000
+   NODE_ENV=development
+   CLIENT_URL=http://localhost:3000
+   ```
 
-The application follows a modern microservices architecture:
+4. Start the backend server:
+   ```
+   npm start
+   ```
 
-- Frontend: React.js with modern UI/UX
-- Backend: FastAPI with Python
-- Database: MongoDB, Redis, Vector Store
-- AI: Gemini API integration
+### Frontend Setup
 
-## Contributing
+1. Navigate to the client directory:
+   ```
+   cd client
+   ```
 
-We welcome contributions! Please read our contributing guidelines before submitting pull requests.
+2. Install dependencies:
+   ```
+   npm install
+   ```
+
+3. Create a `.env` file in the client directory with the following content:
+   ```
+   VITE_API_URL=http://localhost:5000
+   ```
+
+4. Start the frontend development server:
+   ```
+   npm run dev
+   ```
+
+5. Open your browser and navigate to `http://localhost:3000`
+
+## Troubleshooting
+
+### "Failed to fetch" Error
+
+If you see a "Failed to fetch" error, check the following:
+
+1. Make sure the backend server is running
+2. Verify that your GEMINI_API_KEY is valid
+3. Check that the VITE_API_URL in the client .env file matches your backend server address
+4. Ensure there are no CORS issues (the backend should allow requests from your frontend origin)
+
+### API Key Issues
+
+If you're having issues with the Gemini API key:
+
+1. Make sure you've created a valid API key in the Google AI Studio
+2. Check that the key is correctly set in the backend .env file
+3. Restart the backend server after updating the API key
 
 ## License
 
-This project is licensed under the MIT License-see the LICENSE file for details.
+MIT

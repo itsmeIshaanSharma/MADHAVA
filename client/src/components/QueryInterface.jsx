@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './QueryInterface.css';
 
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5001';
 
 const QueryInterface = ({ domain }) => {
   const [query, setQuery] = useState('');
@@ -20,14 +20,14 @@ const QueryInterface = ({ domain }) => {
     setError(null);
 
     try {
-      const response = await fetch(`${API_BASE_URL}/api/query`, {
+      const response = await fetch(`${API_BASE_URL}/api/gemini`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          query: query.trim(),
-          domain: domain.toLowerCase(),
+          prompt: query.trim(),
+          domain: domain.toLowerCase()
         }),
       });
 
@@ -37,7 +37,13 @@ const QueryInterface = ({ domain }) => {
       }
 
       const data = await response.json();
-      setResponse(data);
+      setResponse({
+        answer: data.response,
+        metrics: {
+          responseTime: data.metrics.responseTime,
+          tokenCount: data.metrics.tokenCount
+        }
+      });
     } catch (error) {
       console.error('Error:', error);
       setError(error.message || 'Failed to get response. Please try again later.');
@@ -55,7 +61,7 @@ const QueryInterface = ({ domain }) => {
             type="text"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            placeholder="Enter your query"
+            placeholder={`Ask anything about ${domain}...`}
             required
             disabled={loading}
           />
@@ -77,29 +83,20 @@ const QueryInterface = ({ domain }) => {
             <h3>Answer:</h3>
             <p>{response.answer}</p>
           </div>
-          
-          {response.insights && (
-            <div className="insights">
-              <h3>Key Insights:</h3>
-              <p>{response.insights}</p>
-            </div>
-          )}
-
-          {response.context && response.context.length > 0 && (
-            <div className="context">
-              <h3>Context:</h3>
-              <ul>
-                {response.context.map((ctx, index) => (
-                  <li key={index}>{ctx}</li>
-                ))}
-              </ul>
-            </div>
-          )}
 
           {response.metrics && (
             <div className="metrics">
               <h3>Metrics:</h3>
-              <pre>{JSON.stringify(response.metrics, null, 2)}</pre>
+              <div className="metrics-grid">
+                <div className="metric-item">
+                  <span className="metric-label">Response Time:</span>
+                  <span className="metric-value">{response.metrics.responseTime}</span>
+                </div>
+                <div className="metric-item">
+                  <span className="metric-label">Token Count:</span>
+                  <span className="metric-value">{response.metrics.tokenCount}</span>
+                </div>
+              </div>
             </div>
           )}
         </div>

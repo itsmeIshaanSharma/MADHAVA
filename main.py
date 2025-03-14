@@ -38,7 +38,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-Domain = Literal['finance', 'healthcare', 'legal', 'news', 'ecommerce']
+Domain = Literal['finance', 'healthcare', 'legal', 'news', 'ecommerce', 'code', 'education', 'support', 'travel', 'realestate']
 
 # Initialize components with refined domains
 embeddings = {
@@ -46,7 +46,12 @@ embeddings = {
     'healthcare': EmbeddingStore(namespace='healthcare'),
     'legal': EmbeddingStore(namespace='legal'),
     'news': EmbeddingStore(namespace='news'),
-    'ecommerce': EmbeddingStore(namespace='ecommerce')
+    'ecommerce': EmbeddingStore(namespace='ecommerce'),
+    'code': EmbeddingStore(namespace='code'),
+    'education': EmbeddingStore(namespace='education'),
+    'support': EmbeddingStore(namespace='support'),
+    'travel': EmbeddingStore(namespace='travel'),
+    'realestate': EmbeddingStore(namespace='realestate')
 }
 
 metrics_extractor = MetricsExtractor()
@@ -160,59 +165,114 @@ async def process_query(request: QueryRequest):
         if request.domain not in embeddings:
             raise HTTPException(status_code=400, detail=f"Invalid domain: {request.domain}")
             
-        context_results = embeddings[request.domain].similarity_search(
-            request.query,
-            k=3,
-            metadata_filters=request.filters
-        )
+        # Get domain-specific context with error handling
+        try:
+            context_results = embeddings[request.domain].similarity_search(
+                request.query,
+                k=3,
+                metadata_filters=request.filters
+            )
+            context = [result[0] for result in context_results]
+            sources = [result[1] for result in context_results]
+        except Exception as e:
+            print(f"Error retrieving context: {str(e)}")
+            context = []
+            sources = []
 
-        context = [result[0] for result in context_results]
-        sources = [result[1] for result in context_results]
-        
         # Extract metrics based on domain and context
         metrics = {}
-        for text in context:
-            domain_metrics = metrics_extractor.extract_domain_metrics(text, request.domain)
-            metrics.update(domain_metrics)
-        
-        # Generate AI response using Gemini
-        ai_response = gemini_service.generate_response(
-            query=request.query,
-            context=context,
-            domain=request.domain
-        )
+        try:
+            for text in context:
+                domain_metrics = metrics_extractor.extract_domain_metrics(text, request.domain)
+                metrics.update(domain_metrics)
+        except Exception as e:
+            print(f"Error extracting metrics: {str(e)}")
+            metrics = {}
+
+        # Generate AI response using Gemini with enhanced error handling
+        try:
+            ai_response = gemini_service.generate_response(
+                query=request.query,
+                context=context,
+                domain=request.domain
+            )
+        except Exception as e:
+            print(f"Error generating Gemini response: {str(e)}")
+            ai_response = "I apologize, but I encountered an error while processing your query. Please try again later."
 
         # Generate domain-specific insights if metrics are available
         insights = None
         if metrics:
-            insights = gemini_service.get_domain_insights(
-                domain=request.domain,
-                metrics=metrics
-            )
-        
+            try:
+                insights = gemini_service.get_domain_insights(
+                    domain=request.domain,
+                    metrics=metrics
+                )
+            except Exception as e:
+                print(f"Error generating insights: {str(e)}")
+                insights = None
+
+        # Add domain-specific data processing
+        domain_specific_data = {}
+        if request.domain == 'code':
+            try:
+                # Add code-specific analysis
+                domain_specific_data['code_analysis'] = {
+                    'suggestions': gemini_service.generate_response(
+                        query="Analyze this code and suggest improvements",
+                        context=context,
+                        domain='code'
+                    ),
+                    'complexity': metrics.get('complexity', 'N/A'),
+                    'language': metrics.get('language', 'N/A')
+                }
+            except Exception as e:
+                print(f"Error processing code-specific data: {str(e)}")
+
+        elif request.domain == 'legal':
+            try:
+                # Add legal-specific analysis
+                domain_specific_data['legal_analysis'] = {
+                    'jurisdiction': metrics.get('jurisdiction', 'N/A'),
+                    'risk_level': metrics.get('risk_level', 'N/A'),
+                    'compliance_status': metrics.get('compliance_status', 'N/A')
+                }
+            except Exception as e:
+                print(f"Error processing legal-specific data: {str(e)}")
+
         response = {
             "answer": ai_response,
             "context": context,
             "sources": sources,
             "metrics": metrics if metrics else None,
             "insights": insights,
-            "domain_specific_data": {},
+            "domain_specific_data": domain_specific_data,
             "timestamp": datetime.utcnow().isoformat()
         }
         
-        # Generate any relevant alerts
+        # Generate any relevant alerts with error handling
         if metrics:
-            await alert_manager.send_alert(
-                f"{request.domain}_alert",
-                f"New insights available for {request.domain}",
-                {"domain": request.domain, **metrics}
-            )
+            try:
+                await alert_manager.send_alert(
+                    f"{request.domain}_alert",
+                    f"New insights available for {request.domain}",
+                    {"domain": request.domain, **metrics}
+                )
+            except Exception as e:
+                print(f"Error sending alert: {str(e)}")
         
         return response
         
     except Exception as e:
         print(f"Error processing query: {str(e)}")
-        raise HTTPException(status_code=500, detail=str(e))
+        raise HTTPException(
+            status_code=500,
+            detail={
+                "error": str(e),
+                "message": "An error occurred while processing your query",
+                "timestamp": datetime.utcnow().isoformat()
+            }
+        )
 
 @app.get("/status")
 async def get_status():
