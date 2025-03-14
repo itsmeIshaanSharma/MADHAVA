@@ -3,8 +3,12 @@
   justify-content: space-between;
   align-items: center;
   background-color: #1a1a1a;
-  padding: 0.5rem 1rem;
+  padding: 0.8rem 1rem;
   color: #fff;
+  position: relative;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
 .navbar-logo a {
@@ -40,7 +44,7 @@
 }
 
 .auth-button {
-  background: #4a90e2;
+  background: rgba(255, 255, 255, 0.1);
   border: none;
   padding: 0.5rem 1rem;
   color: #fff;
@@ -75,6 +79,25 @@
   gap: 1rem;
 }
 
+.navbar-center {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-grow: 1;
+  justify-content: center;
+}
+
+.navbar-center .nav-link {
+  font-size: 1rem;
+  padding: 0.5rem 1rem;
+}
+
+.navbar-right {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
 .menu-button:hover {
   background-color: var(--bg-primary);
   transform: scale(1.05);
@@ -99,10 +122,27 @@
   transform: scale(1.05);
 }
 
-.navbar-right {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
+.nav-link {
+  color: var(--text-primary);
+  text-decoration: none;
+  font-weight: 500;
+  padding: 0.5rem 0.75rem;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+.nav-link:hover {
+  background-color: var(--bg-primary);
+  color: var(--accent-color);
+  transform: translateY(-2px);
+}
+
+.dark .nav-link {
+  color: var(--text-primary);
+}
+
+.dark .nav-link:hover {
+  background-color: rgba(255, 255, 255, 0.1);
 }
 
 .theme-toggle {
@@ -162,8 +202,8 @@
 }
 
 .auth-button.signin {
-  background: none;
-  border: 1px solid var(--border-color);
+  background: #121212;
+
   color: var(--text-primary);
 }
 
@@ -181,12 +221,12 @@
 }
 
 .auth-button.signup {
-  background: var(--gradient-primary);
-  border: none;
-  color: var(--bg-primary);
+
+  background-color: #121212;
+
   font-weight: 600;
   text-shadow: 0 1px 1px rgba(255, 255, 255, 0.2);
-  box-shadow: 0 4px 15px rgba(0, 255, 179, 0.3);
+
 }
 
 .auth-button.signup:hover {
@@ -197,8 +237,16 @@
 
 /* Responsive Design */
 @media (max-width: 768px) {
+  .navbar-center {
+    display: none; /* Hide center links on smaller screens */
+  }
+
   .navbar-links {
-    display: none; /* Hide links on smaller screens */
+    display: none;
+  }
+
+  .navbar-right .nav-link {
+    display: none;
   }
 
   .navbar-actions {

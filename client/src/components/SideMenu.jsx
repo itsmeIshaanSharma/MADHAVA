@@ -20,7 +20,26 @@ const SideMenu = ({ isOpen, onClose }) => {
         </div>
 
         <div className="side-menu-content">
-          {/* User Section */}
+          {/* About Section - Moved to top */}
+          <div className="menu-section">
+            <h3>About</h3>
+            <ul>
+              <li>
+                <Link to="/about" onClick={onClose}>
+                  <span className="icon">ℹ️</span>
+                  About MADHAVA
+                </Link>
+              </li>
+              <li>
+                <Link to="/team" onClick={onClose}>
+                  <span className="icon">👥</span>
+                  Our Team
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+          {/* Domains Section */}
           <div className="menu-section">
             <h3>Domains</h3>
             <ul>
@@ -63,20 +82,7 @@ const SideMenu = ({ isOpen, onClose }) => {
             </ul>
           </div>
 
-          {/* History Section */}
-          <div className="menu-section">
-            <h3>About</h3>
-            <ul>
-              <li>
-                <Link to="/team" onClick={onClose}>
-                  <span className="icon">👥</span>
-                  Our Team
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          {/* Additional menu sections */}
+          {/* Resources Section */}
           <div className="menu-section">
             <h3>Resources</h3>
             <ul>
@@ -102,6 +108,12 @@ const SideMenu = ({ isOpen, onClose }) => {
                 <Link to="/pricing" onClick={onClose}>
                   <span className="icon">💲</span>
                   Pricing
+                </Link>
+              </li>
+              <li>
+                <Link to="/contact" onClick={onClose}>
+                  <span className="icon">📞</span>
+                  Contact Us
                 </Link>
               </li>
             </ul>

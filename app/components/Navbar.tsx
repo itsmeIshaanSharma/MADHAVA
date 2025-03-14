@@ -47,22 +47,6 @@ const Navbar = () => {
               Documentation
             </Link>
           </div>
-
-          {/* Auth Buttons */}
-          <div className="flex items-center space-x-4">
-            <Link 
-              href="/auth/signin"
-              className="text-gray-600 hover:text-blue-600 transition"
-            >
-              Sign In
-            </Link>
-            <Link 
-              href="/auth/signup"
-              className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition"
-            >
-              Get API Key
-            </Link>
-          </div>
         </div>
       </div>
     </nav>

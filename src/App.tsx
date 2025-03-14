@@ -133,7 +133,7 @@ function App() {
             <div className="absolute inset-0 rounded-full border-4 border-white border-t-transparent animate-spin"></div>
             <span className="text-white text-2xl">{currentDomain.symbol}</span>
           </div>
-          <p className="mt-4 text-white text-lg font-medium">Loading M.A.D.H.A.V.A.</p>
+          <p className="mt-4 text-white text-lg font-medium">Loading...</p>
           
           <div className="w-48 h-1 bg-white/20 rounded-full mt-4">
             <div 
@@ -163,10 +163,6 @@ function App() {
               >
                 {currentDomain.symbol}
               </motion.div>
-              <div>
-                <h1 className="text-2xl font-bold text-white app-title">M.A.D.H.A.V.A.</h1>
-                <p className="text-xs domain-subtitle text-white/80">{currentDomain.title} Intelligence</p>
-              </div>
             </Link>
             
             <div className="flex items-center space-x-6">
@@ -306,7 +302,7 @@ function App() {
                 <div className="space-y-8">
                   <div className="text-center max-w-4xl mx-auto mb-12">
                     <h1 className="text-4xl font-bold mb-6">
-                      Welcome to M.A.D.H.A.V.A.
+                      Welcome
                     </h1>
                     <p className="text-xl mb-4">
                       Intelligent Data Processing for Smarter Decisions
@@ -315,8 +311,7 @@ function App() {
                       "Turning raw data into actionable insights – instantly, accurately, and efficiently."
                     </p>
                     <p className="text-gray-600">
-                      M.A.D.H.A.V.A. (Multi-domain Analytical Data Harvesting & Automated Verification Assistant) 
-                      is an advanced AI-driven platform designed to provide real-time, domain-specific, and 
+                      An advanced AI-driven platform designed to provide real-time, domain-specific, and 
                       verified information for professionals.
                     </p>
                   </div>
@@ -368,7 +363,7 @@ function App() {
           </Routes>
         </main>
         
-        <footer className={`bg-gradient-to-r ${currentDomain.color} text-white mt-auto`}>
+        <footer className={`bg-white text-gray-800 mt-auto border-t-4 border-${currentDomain.lightColor}`}>
           <div className="max-w-7xl mx-auto px-4 py-6 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               <div>
@@ -380,18 +375,17 @@ function App() {
                   >
                     {currentDomain.symbol}
                   </motion.span>
-                  <span>M.A.D.H.A.V.A.</span>
                 </h3>
-                <p className="text-sm domain-subtitle text-white/80">
+                <p className="text-sm domain-subtitle">
                   Multi-domain Analytical Data Harvesting & Automated Verification Assistant
                 </p>
               </div>
               <div>
                 <h3 className="text-lg font-semibold mb-2">Resources</h3>
-                <ul className="text-sm space-y-1 text-blue-200">
-                  <li><a href="#" className="hover:text-white">Documentation</a></li>
-                  <li><a href="#" className="hover:text-white">API Reference</a></li>
-                  <li><a href="#" className="hover:text-white">Community Forum</a></li>
+                <ul className="text-sm space-y-1">
+                  <li><a href="#" className="text-blue-600 hover:text-blue-800">Documentation</a></li>
+                  <li><a href="#" className="text-blue-600 hover:text-blue-800">API Reference</a></li>
+                  <li><a href="#" className="text-blue-600 hover:text-blue-800">Community Forum</a></li>
                 </ul>
               </div>
               <div>
@@ -402,9 +396,9 @@ function App() {
                 </p>
               </div>
             </div>
-            <div className="mt-8 pt-6 border-t border-opacity-30">
+            <div className="mt-8 pt-6 border-t border-gray-200">
               <p className="text-center text-sm domain-subtitle">
-                © {new Date().getFullYear()} M.A.D.H.A.V.A. - Multi-Domain Intelligence Platform
+                © {new Date().getFullYear()} - Multi-Domain Intelligence Platform
               </p>
             </div>
           </div>

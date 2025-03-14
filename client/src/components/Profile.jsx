@@ -313,38 +313,80 @@ const Support = () => {
         {activeTab === 'faq' && (
           <div className="faq-section">
             <h3>Frequently Asked Questions</h3>
-            <div className="faq-list">
-              <div className="faq-item">
-                <h4>How do I get started?</h4>
-                <p>Select a domain from the home page and start asking questions! Each domain is specialized for specific types of queries.</p>
+            
+            <div className="faq-category">
+              <h4 className="category-title">Getting Started</h4>
+              <div className="faq-list">
+                <div className="faq-item">
+                  <h4>How do I get started?</h4>
+                  <p>Select a domain from the home page and start asking questions! Each domain is specialized for specific types of queries.</p>
+                </div>
+                <div className="faq-item">
+                  <h4>What domains are supported?</h4>
+                  <p>We currently support:</p>
+                  <ul>
+                    <li>💰 Finance: Market analysis, investment insights, financial planning</li>
+                    <li>🏥 Healthcare: Medical research, clinical analysis, health information</li>
+                    <li>⚖️ Legal: Case analysis, compliance, contract review</li>
+                    <li>💻 Code Assistant: Debugging, code review, optimization</li>
+                    <li>📰 News: Real-time analysis, trend detection, fact-checking</li>
+                    <li>🛍️ E-commerce: Market trends, consumer behavior, pricing analysis</li>
+                  </ul>
+                </div>
+                <div className="faq-item">
+                  <h4>Can I use MADHAVA on mobile devices?</h4>
+                  <p>Yes! Our platform is fully responsive and works on smartphones, tablets, and desktop computers. You can access all features from any device with a modern web browser.</p>
+                </div>
               </div>
-              <div className="faq-item">
-                <h4>How does the AI work?</h4>
-                <p>Our AI uses advanced language models (including Google's Gemini and custom-trained models) to analyze your queries and provide accurate responses with domain-specific context.</p>
+            </div>
+            
+            <div className="faq-category">
+              <h4 className="category-title">Technology & Performance</h4>
+              <div className="faq-list">
+                <div className="faq-item">
+                  <h4>How does the AI work?</h4>
+                  <p>Our AI uses advanced language models (including Google's Gemini and custom-trained models) to analyze your queries and provide accurate responses with domain-specific context.</p>
+                </div>
+                <div className="faq-item">
+                  <h4>How accurate are the responses?</h4>
+                  <p>Our AI models are trained on verified data sources and use real-time validation. However, always verify critical information from official sources.</p>
+                </div>
+                <div className="faq-item">
+                  <h4>How often is the AI updated?</h4>
+                  <p>We regularly update our AI models with the latest data and improvements. Domain-specific models are updated monthly, while our core language models are updated quarterly with the latest advancements in AI technology.</p>
+                </div>
               </div>
-              <div className="faq-item">
-                <h4>What domains are supported?</h4>
-                <p>We currently support:</p>
-                <ul>
-                  <li>💰 Finance: Market analysis, investment insights, financial planning</li>
-                  <li>🏥 Healthcare: Medical research, clinical analysis, health information</li>
-                  <li>⚖️ Legal: Case analysis, compliance, contract review</li>
-                  <li>💻 Code Assistant: Debugging, code review, optimization</li>
-                  <li>📰 News: Real-time analysis, trend detection, fact-checking</li>
-                  <li>🛍️ E-commerce: Market trends, consumer behavior, pricing analysis</li>
-                </ul>
+            </div>
+            
+            <div className="faq-category">
+              <h4 className="category-title">Account & Data</h4>
+              <div className="faq-list">
+                <div className="faq-item">
+                  <h4>Can I save my queries?</h4>
+                  <p>Yes! All queries are automatically saved in your history. You can also bookmark important responses for quick reference.</p>
+                </div>
+                <div className="faq-item">
+                  <h4>Is my data secure?</h4>
+                  <p>We employ industry-standard encryption and security measures. Your data is never shared without consent and is stored securely.</p>
+                </div>
+                <div className="faq-item">
+                  <h4>Can I export my data?</h4>
+                  <p>Yes, you can export your query history, bookmarks, and analysis results in various formats including PDF, CSV, and JSON. Look for the export option in the respective sections of your profile.</p>
+                </div>
               </div>
-              <div className="faq-item">
-                <h4>How accurate are the responses?</h4>
-                <p>Our AI models are trained on verified data sources and use real-time validation. However, always verify critical information from official sources.</p>
-              </div>
-              <div className="faq-item">
-                <h4>Can I save my queries?</h4>
-                <p>Yes! All queries are automatically saved in your history. You can also bookmark important responses for quick reference.</p>
-              </div>
-              <div className="faq-item">
-                <h4>Is my data secure?</h4>
-                <p>We employ industry-standard encryption and security measures. Your data is never shared without consent and is stored securely.</p>
+            </div>
+            
+            <div className="faq-category">
+              <h4 className="category-title">Usage & Support</h4>
+              <div className="faq-list">
+                <div className="faq-item">
+                  <h4>Are there usage limits?</h4>
+                  <p>Usage limits depend on your subscription plan. Free users have a limited number of queries per day, while premium and enterprise users enjoy higher or unlimited usage. Check the Pricing page for detailed information about each plan.</p>
+                </div>
+                <div className="faq-item">
+                  <h4>How do I provide feedback or report issues?</h4>
+                  <p>You can provide feedback or report issues through the Support tab in your profile, or by emailing our support team at support@madhava.ai. We value your input and continuously improve our platform based on user feedback.</p>
+                </div>
               </div>
             </div>
           </div>

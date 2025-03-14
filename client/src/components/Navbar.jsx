@@ -6,7 +6,7 @@ import './Navbar.css';
 import logo from '../assets/logo.png'; 
 const Navbar = ({ onMenuClick, user, onAuthClick, onLogout }) => {
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
-  const { isDarkMode, toggleTheme } = useTheme();
+  const { isDarkMode } = useTheme();
 
   const handleProfileClick = () => {
     if (user) {
@@ -27,15 +27,16 @@ const Navbar = ({ onMenuClick, user, onAuthClick, onLogout }) => {
         </Link>
       </div>
 
-      <div className="navbar-right">
-        <button 
-          className="theme-toggle" 
-          onClick={toggleTheme}
-          title={isDarkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
-        >
-          {isDarkMode ? '☀️' : '🌙'}
-        </button>
+      <div className="navbar-center">
+        <Link to="/" className="nav-link">Home</Link>
+        <Link to="/about" className="nav-link">About</Link>
+        <Link to="/pricing" className="nav-link">Pricing</Link>
+        <Link to="/api-reference" className="nav-link">API</Link>
+        <Link to="/team" className="nav-link">Team</Link>
+        <Link to="/contact" className="nav-link">Contact</Link>
+      </div>
 
+      <div className="navbar-right">
         {user ? (
           <div className="profile-section">
             <button className="profile-button" onClick={handleProfileClick}>
@@ -53,8 +54,8 @@ const Navbar = ({ onMenuClick, user, onAuthClick, onLogout }) => {
           </div>
         ) : (
           <div className="auth-buttons">
-            <Link to="/signin" className="auth-button signin">Sign In</Link>
-            <Link to="/signup" className="auth-button signup">Sign Up</Link>
+            <Link to="/signin" className="auth-button signin"></Link>
+            <Link to="/signup" className="auth-button signup"></Link>
           </div>
         )}
       </div>

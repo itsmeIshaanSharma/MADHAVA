@@ -227,26 +227,70 @@
   margin-bottom: 2rem;
 }
 
+.faq-category {
+  margin-bottom: 2rem;
+}
+
+.category-title {
+  font-size: 1.3rem;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--border-color);
+  font-weight: 600;
+  background: linear-gradient(135deg, var(--accent-color), #4a90e2);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+}
+
 .faq-list {
   display: grid;
   gap: 1rem;
 }
 
 .faq-item {
-  background: var(--bg-primary);
+  background: var(--bg-secondary);
   padding: 1.5rem;
   border-radius: 8px;
+  box-shadow: 0 2px 4px var(--shadow-color);
+  margin-bottom: 1rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.faq-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px var(--shadow-color);
 }
 
 .faq-item h4 {
-  margin: 0 0 0.5rem;
-  color: var(--text-primary);
+  margin: 0 0 1rem;
   font-size: 1.1rem;
+  font-weight: 600;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--border-color);
+  transition: color 0.2s ease;
+  cursor: pointer;
+  background: linear-gradient(135deg, var(--accent-color), #63f5aa);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+}
+
+.faq-item h4:hover {
+  background: linear-gradient(135deg, #63f5aa, var(--accent-color));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
 }
 
 .faq-item p {
   margin: 0;
   color: var(--text-secondary);
+  line-height: 1.6;
+  padding: 0.5rem 0;
 }
 
 .contact-support form {
@@ -287,6 +331,62 @@
   }
 
   .support-content {
+    grid-template-columns: 1fr;
+  }
+
+  .documentation-tabs {
+    flex-wrap: wrap;
+  }
+
+  .tab-button {
+    flex: 1;
+    min-width: 120px;
+  }
+
+  .documentation-content {
+    padding: 1rem;
+  }
+  
+  .faq-category {
+    margin-bottom: 1.5rem;
+  }
+  
+  .category-title {
+    font-size: 1.2rem;
+    margin-bottom: 0.8rem;
+    background: linear-gradient(135deg, var(--accent-color), #4a90e2);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+  }
+  
+  .faq-item {
+    padding: 1.2rem;
+    margin-bottom: 0.8rem;
+  }
+  
+  .faq-item h4 {
+    font-size: 1rem;
+    margin-bottom: 0.8rem;
+    padding-bottom: 0.4rem;
+    background: linear-gradient(135deg, var(--accent-color), #63f5aa);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+  }
+  
+  .faq-item p {
+    font-size: 0.9rem;
+    padding: 0.3rem 0;
+  }
+
+  .support-options {
+    grid-template-columns: 1fr;
+  }
+
+  .shortcuts-grid {
     grid-template-columns: 1fr;
   }
 }

@@ -1,4 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import ReactMarkdown from 'react-markdown';
+import rehypeRaw from 'rehype-raw';
+import rehypeHighlight from 'rehype-highlight';
+import remarkGfm from 'remark-gfm';
+import hljs from 'highlight.js';
+import TypeWriterMarkdown from './TypeWriterMarkdown';
 import './QueryInterface.css';
 
 const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5001';
@@ -8,6 +14,23 @@ const QueryInterface = ({ domain }) => {
   const [response, setResponse] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [animateResponse, setAnimateResponse] = useState(true);
+
+  // Clear response and query when domain changes
+  useEffect(() => {
+    setResponse(null);
+    setError(null);
+    setQuery('');
+  }, [domain]);
+
+  // Apply syntax highlighting to code blocks after component updates
+  useEffect(() => {
+    if (response && !animateResponse) {
+      document.querySelectorAll('pre code').forEach((block) => {
+        hljs.highlightElement(block);
+      });
+    }
+  }, [response, animateResponse]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -53,8 +76,26 @@ const QueryInterface = ({ domain }) => {
     }
   };
 
+  // Function to format code blocks in the response
+  const formatResponse = (text) => {
+    // Ensure code blocks are properly formatted
+    return text.replace(/```(\w*)\n([\s\S]*?)```/g, (match, language, code) => {
+      return `\n\`\`\`${language}\n${code.trim()}\n\`\`\`\n`;
+    });
+  };
+
+  // Toggle animation
+  const toggleAnimation = () => {
+    setAnimateResponse(!animateResponse);
+  };
+
   return (
     <div className="query-interface">
+      <div className="domain-indicator">
+        <span className="domain-label">Current Domain:</span>
+        <span className="domain-value">{domain}</span>
+      </div>
+      
       <form onSubmit={handleSubmit}>
         <div className="input-group">
           <input
@@ -77,11 +118,44 @@ const QueryInterface = ({ domain }) => {
         </div>
       )}
 
+      {loading && (
+        <div className="loading-indicator">
+          <div className="spinner"></div>
+          <p>Generating response...</p>
+        </div>
+      )}
+
       {response && (
         <div className="response-section">
-          <div className="answer">
+          <div className="response-header">
             <h3>Answer:</h3>
-            <p>{response.answer}</p>
+            {response.answer.length > 300 && (
+              <button 
+                className="animation-toggle" 
+                onClick={toggleAnimation}
+                title={animateResponse ? "Turn off typing animation" : "Turn on typing animation"}
+              >
+                {animateResponse ? "Disable Animation" : "Enable Animation"}
+              </button>
+            )}
+          </div>
+          
+          <div className="answer">
+            <div className="markdown-content">
+              {animateResponse ? (
+                <TypeWriterMarkdown 
+                  content={formatResponse(response.answer)} 
+                  speed={5}
+                />
+              ) : (
+                <ReactMarkdown
+                  rehypePlugins={[rehypeRaw, rehypeHighlight]}
+                  remarkPlugins={[remarkGfm]}
+                >
+                  {formatResponse(response.answer)}
+                </ReactMarkdown>
+              )}
+            </div>
           </div>
 
           {response.metrics && (

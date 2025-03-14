@@ -35,22 +35,15 @@ nav {
 
 /* Header styles */
 .App-header {
-  background-color: #1a1a1a;
-  color: #fff;
-  padding: 1rem;
+  display: none;
 }
 
 .header-content {
-  display: flex;
-  align-items: flex-start;
-  gap: 1rem;
-  max-width: 1200px;
-  margin: 0 auto;
+  display: none;
 }
 
 .header-logo img {
-  max-width: 80px;
-  object-fit: contain;
+  display: none;
 }
 
 .header-text {
@@ -85,6 +78,7 @@ nav {
   padding: 4rem 2rem;
   max-width: 1200px;
   margin: 0 auto;
+  padding-top: 1rem;
 }
 
 .domain-card {
@@ -348,4 +342,23 @@ nav {
 
 .query-date {
   color: var(--text-secondary);
+}
+
+/* Main content adjustments */
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding-top: 0;
+  min-height: calc(100vh - 60px);
+  position: relative;
+  z-index: 5;
+  overflow: visible;
+}
+
+/* Page container */
+.page-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 } 
